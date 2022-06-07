@@ -1,4 +1,6 @@
-document.addEventListener("keydown", (e) => {
+// Audio
+
+function playSound(e) {
     const audio = document.querySelector(`audio[data-key=${e.code}]`);
     if (!audio) {
         return;
@@ -7,8 +9,12 @@ document.addEventListener("keydown", (e) => {
     audio.play();
 
     const key = document.querySelector(`.key[data-key=${e.code}`);
-    key.classList.add("playing");
-});
+    key.classList.toggle("playing");
+}
+
+document.addEventListener("keydown", playSound);
+
+// Visual
 
 const keys = document.querySelectorAll(".key");
 
