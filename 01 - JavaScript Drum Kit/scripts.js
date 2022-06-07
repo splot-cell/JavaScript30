@@ -1,4 +1,4 @@
-// Audio
+// Audio and animation start
 
 function playSound(e) {
     const audio = document.querySelector(`audio[data-key=${e.code}]`);
@@ -9,20 +9,19 @@ function playSound(e) {
     audio.play();
 
     const key = document.querySelector(`.key[data-key=${e.code}`);
-    key.classList.toggle("playing");
+    key.classList.add("playing");
 }
 
 document.addEventListener("keydown", playSound);
 
-// Visual
+// Animation reset
 
-const keys = document.querySelectorAll(".key");
-
-function removeTransition(e) {
-    if (e.propertyName !== "transform") {
+function removeAnimation(e) {
+    const key = document.querySelector(`.key[data-key=${e.code}`);
+    if (!key) {
         return;
     }
-    e.target.classList.remove("playing");
+    key.classList.remove("playing");
 }
 
-keys.forEach((key) => key.addEventListener("transitionend", removeTransition));
+document.addEventListener("keyup", removeAnimation);
